@@ -65,7 +65,7 @@ Your milage may vary, but in my case I need use a different tokenizer
 Create a directory called `server` and then create a file called `api_serve.py` with the following content
 
 
-```python
+```shell
 !python -m vllm.entrypoints.openai.api_server \
     --port $CDSW_APP_PORT \
     --host 127.0.0.1 \
@@ -91,7 +91,7 @@ _Hint: At this moment CML will check for liveliness by constantly probing the RE
 When you opened the application in a new tab in your browser, you will get something like this:
 
 
-```python
+```json
 {
   "detail": "Not Found"
 }
@@ -100,7 +100,7 @@ When you opened the application in a new tab in your browser, you will get somet
 That's actually a good sign. If you change the url by adding `v1/models` you will get something like this (depending on the model that you load)
 
 
-```python
+```json
 {
   "object": "list",
   "data": [
@@ -165,3 +165,49 @@ Head on to examples directory for to see how we can make use of our recently dep
 * `Simple-streaming.ipynb` For a simple example but utilizing streaming token output instead of batch
 * `Simple-RAG.ipynb` [WIP] For an example of RAG text generation from a supplied document context
 * `Pandasai.ipynb` [WIP] For an example on how to use PandasAI (requires Starcoder model to be deployed)
+
+In order to setup the connection to our local LLM Server you need to specify the base URL and an empty OpenAI token. In my case, I have `LLM_API_SERVER_BASE` and `LLM_LOADED` Environment variables set.
+
+```python
+import openai
+import os
+
+openai.api_key = "EMPTY"
+openai.api_base = os.environ["LLM_API_SERVER_BASE"]
+model = os.environ["LLM_LOADED"]
+```
+Once all these are set, we can then make a call to our REST API
+
+```python
+response = openai.Completion.create(
+                        model=model,
+                        prompt="Sunda Kelapa is",
+                        max_tokens=500,
+                        temperature=0.7,
+                        stop="</s>")
+print("Response result:", response)
+```
+
+You will then get the response in JSON format as what you will normally get using OpenAI API
+
+```json
+Response result: {
+  "id": "cmpl-048810d973b4426483ea9840f6b9ca3c",
+  "object": "text_completion",
+  "created": 1690099835,
+  "model": "./models/vicuna-7b-v1.3",
+  "choices": [
+    {
+      "index": 0,
+      "text": "a harbour district located in Central Jakarta, Indonesia. It is named after the Sundanese people who lived in the area before the arrival of the Dutch colonizers. The Sundanese people used to trade with the local Javanese and Arab traders. The harbour was an important trading center for spices, textiles, and other goods. Today, Sunda Kelapa is a popular tourist attraction due to its history and cultural significance.",
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 6,
+    "total_tokens": 103,
+    "completion_tokens": 97
+  }
+}
+```
