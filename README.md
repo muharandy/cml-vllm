@@ -162,8 +162,8 @@ Create a CPU session (no need GPU) then install the `openai` client package by r
 
 Head on to examples directory for to see how we can make use of our recently deployed REST API. This list will keep growing as I build more examples:
 * [`Simple.ipynb`](examples/Simple.ipynb) For a simple example of completions API
-* `Simple-langchain.ipynb` For as simple langchain integration example
-* `Simple-streaming.ipynb` For a simple example but utilizing streaming token output instead of batch
+* [`Simple-langchain.ipynb`](examples/Simple-langchain.ipynb) For as simple langchain integration example
+* [`Simple-streaming.ipynb`](examples/Simple-streaming.ipynb) For a simple example but utilizing streaming token output instead of batch
 * `Simple-RAG.ipynb` [WIP] For an example of RAG text generation from a supplied document context
 * `Pandasai.ipynb` [WIP] For an example on how to use PandasAI (requires Starcoder model to be deployed)
 
