@@ -165,9 +165,3 @@ Head on to examples directory for to see how we can make use of our recently dep
 * `Simple-streaming.ipynb` For a simple example but utilizing streaming token output instead of batch
 * `Simple-RAG.ipynb` [WIP] For an example of RAG text generation from a supplied document context
 * `Pandasai.ipynb` [WIP] For an example on how to use PandasAI (requires Starcoder model to be deployed)
-
-
-
-```python
-
-```
