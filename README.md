@@ -38,7 +38,7 @@ Refer to the requirements stated above, several things to note here are:
 For this example we will be using `lmsys/vicuna-7b-v1.3` since it is supported by vLLM, it can fit in a GPU with 16GB VRAM, and it can run on GPU with 7.0 compute capability. The only catch of running this model (or at least in my environment) is I cannot run it with the tokenizer that comes along with the model. I need to use `hf-internal-testing/llama-tokenizer` for it to work. For more details, refer to:
 * https://github.com/vllm-project/vllm/pull/284
 
-Optionally, you can download a different model and adjust the rest of the steps accordingly. Since we are using vLLM, just make sure that you are using one of the supported models.
+Optionally, we can download a different model and adjust the rest of the steps accordingly. Since we are using vLLM, just make sure that we are using one of the supported models.
 
 
 ```python
@@ -84,11 +84,11 @@ Once the script is ready, we will create an application deployment in CML
 * Select the resource profile as per the model requirement (suggested minimum: 4 vcores, 16GB, and 1GPU)
 * Once everything is filled up, hit `Create Application`
 
-You will wait for the application to be deployed and running, then click the application to open up a new tab in your browser.
+We will wait for the application to be deployed and running, then click the application to open up a new tab in our browser.
 
-_Hint: At this moment CML will check for liveliness by constantly probing the REST server. This will create a swarm of HTTP 404 error due to non-existing path. You might need to disable logging once you make sure that the everything is running well_
+_Hint: At this moment CML will check for liveliness by constantly probing the REST server. This will create a swarm of HTTP 404 error due to non-existing path. We might need to disable logging once we make sure that the everything is running well_
 
-When you opened the application in a new tab in your browser, you will get something like this:
+When we opened the application in a new tab in our browser, we will get something like this:
 
 
 ```json
@@ -97,7 +97,7 @@ When you opened the application in a new tab in your browser, you will get somet
 }
 ```
 
-That's actually a good sign. If you change the url by adding `v1/models` you will get something like this (depending on the model that you load)
+That's actually a good sign. If we change the url by adding `v1/models` we will get something like this (depending on the model that we loaded)
 
 
 ```json
@@ -132,7 +132,7 @@ That's actually a good sign. If you change the url by adding `v1/models` you wil
 }
 ```
 
-You can also try accessing the REST API using `curl` following OpenAI REST API specs by changing the `v1/models` to `/v1/completions/`
+We can also try accessing the REST API using `curl` following OpenAI REST API specs by changing the `v1/models` to `/v1/completions/`
 
 
 ```python
@@ -154,7 +154,7 @@ If things are working correctly, copy our faux OpenAI base URL which is API Serv
 * Create a new variable as `LLM_API_SERVER_BASE` 
 * Paste your base URL and hit `Submit`
 
-_Hint: You can also set this in the `Site Administration` level to make it globally accessible. You can also make the LLM path as environment variable. In our example we can make `./models/vicuna-7b-v1.3` as `LLM_LOADED`_
+_Hint: We can also set this in the `Site Administration` level to make it globally accessible. We can also make the LLM path as environment variable. In our example we can make `./models/vicuna-7b-v1.3` as `LLM_LOADED`_
 
 ## Accessing The REST API from Sessions
 
@@ -167,7 +167,7 @@ Head on to examples directory for to see how we can make use of our recently dep
 * `Simple-RAG.ipynb` [WIP] For an example of RAG text generation from a supplied document context
 * `Pandasai.ipynb` [WIP] For an example on how to use PandasAI (requires Starcoder model to be deployed)
 
-In order to setup the connection to our local LLM Server you need to specify the base URL and an empty OpenAI token. In my case, I have `LLM_API_SERVER_BASE` and `LLM_LOADED` Environment variables set.
+In order to setup the connection to our local LLM Server we need to specify the base URL and an empty OpenAI token. In my case, I have `LLM_API_SERVER_BASE` and `LLM_LOADED` Environment variables set.
 
 ```python
 import openai
@@ -189,7 +189,7 @@ response = openai.Completion.create(
 print("Response result:", response)
 ```
 
-You will then get the response in JSON format as what you will normally get using OpenAI API
+We will then get the response in JSON format as what we will normally get using OpenAI API
 
 ```json
 Response result: {
